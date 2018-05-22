@@ -1,0 +1,2 @@
+# PINGAN-Pedestrian-Detection-2018
+PINGAN Pedestrian Detection for WIDER FACE AND PEDESTRIAN CHALLENGE 2018
