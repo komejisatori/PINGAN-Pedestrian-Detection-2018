@@ -44,7 +44,7 @@ def train_svm():
 
 
 def sliding_window(image, window_size, step_size):
-    '''
+    """
     This function returns a patch of the input 'image' of size
     equal to 'window_size'. The first image returned top-left
     co-ordinate (0, 0) and are increment in both x and y directions
@@ -55,7 +55,7 @@ def sliding_window(image, window_size, step_size):
     step_size - incremented Size of Window
     The function returns a tuple -
     (x, y, im_window)
-    '''
+    """
     for y in range(0, image.shape[0], step_size[1]):
         for x in range(0, image.shape[1], step_size[0]):
             yield (x, y, image[y: y + window_size[1], x: x + window_size[0]])
@@ -101,6 +101,8 @@ def detector(filename, clf):
     for (x_tl, y_tl, _, w, h) in detections:
         cv2.rectangle(im, (x_tl, y_tl), (x_tl + w, y_tl + h), (0, 255, 0), thickness=2)
 
+    res = filename.split("\\")[1]
+
     rects = np.array([[x, y, x + w, y + h] for (x, y, _, w, h) in detections])
     sc = [score[0] for (x, y, score, w, h) in detections]
     print("sc: ", sc)
@@ -109,7 +111,21 @@ def detector(filename, clf):
     print("shape, ", pick.shape)
 
     for (xA, yA, xB, yB) in pick:
-        print("xA, yA, xB, yB: " + str(xA) + "-" + str(yA) + "-" + str(xB) + "-" + str(yB))
+        x = xA
+        y = yA
+        w = xB - xA
+        h = yB - yA
+        res += " "
+        res += str(1)
+        res += " "
+        res += str(x)
+        res += " "
+        res += str(y)
+        res += " "
+        res += str(w)
+        res += " "
+        res += str(h)
+
         cv2.rectangle(clone, (xA, yA), (xB, yB), (0, 255, 0), 2)
 
     # plt.axis("off")
@@ -117,10 +133,11 @@ def detector(filename, clf):
     # plt.title("Raw Detection before NMS")
     # plt.show()
 
-    plt.axis("off")
-    plt.imshow(cv2.cvtColor(clone, cv2.COLOR_BGR2RGB))
-    plt.title("Final Detections after applying NMS")
-    plt.show()
+    # plt.axis("off")
+    # plt.imshow(cv2.cvtColor(clone, cv2.COLOR_BGR2RGB))
+    # plt.title("Final Detections after applying NMS")
+    # plt.show()
+    return res
 
 
 def test_folder(foldername):
@@ -130,6 +147,17 @@ def test_folder(foldername):
         detector(filename, clf)
 
 
+def test_all(foldername):
+    filenames = glob.iglob(os.path.join(foldername, '*'))
+    clf = train_svm()
+
+    with open('image_train.txt', 'a') as the_file:
+        for filename in filenames:
+            the_file.write(detector(filename, clf))
+
+
 if __name__ == '__main__':
-    foldername = 'test_image'
-    test_folder(foldername)
+    #foldername = 'test_image'
+    # test_folder(foldername)
+    foldername = '/media/workspace/bgong/data/WIDER_Pedestrian_Challenge/data/train'
+    test_all(foldername)
