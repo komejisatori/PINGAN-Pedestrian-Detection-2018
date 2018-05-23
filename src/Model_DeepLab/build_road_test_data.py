@@ -10,7 +10,7 @@ from os.path import join
 
 FLAGS = tf.app.flags.FLAGS
 
-tf.app.flags.DEFINE_string('data_dir', '~/segmentation/resize_data', 'Folder containing images.')
+tf.app.flags.DEFINE_string('data_dir', '/home/oliver/segmentation/resize_data', 'Folder containing images.')
 
 tf.app.flags.DEFINE_string('output_dir',  '.', 'Path to tfrecord.')
 
