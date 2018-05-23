@@ -133,10 +133,10 @@ def detector(filename, clf):
     # plt.title("Raw Detection before NMS")
     # plt.show()
 
-    # plt.axis("off")
-    # plt.imshow(cv2.cvtColor(clone, cv2.COLOR_BGR2RGB))
-    # plt.title("Final Detections after applying NMS")
-    # plt.show()
+    plt.axis("off")
+    plt.imshow(cv2.cvtColor(clone, cv2.COLOR_BGR2RGB))
+    plt.title("Final Detections after applying NMS")
+    plt.show()
     return res
 
 
@@ -157,7 +157,7 @@ def test_all(foldername):
 
 
 if __name__ == '__main__':
-    #foldername = 'test_image'
-    # test_folder(foldername)
-    foldername = '/media/workspace/bgong/data/WIDER_Pedestrian_Challenge/data/train'
-    test_all(foldername)
+    foldername = 'test_image'
+    test_folder(foldername)
+    # foldername = '/media/workspace/bgong/data/WIDER_Pedestrian_Challenge/data/train'
+    # test_all(foldername)
