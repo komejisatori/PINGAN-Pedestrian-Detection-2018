@@ -6,7 +6,7 @@ directory = os.fsencode('/home/oliver/segmentation/resize_data')
 for file in os.listdir(directory):
     filename = os.fsdecode(file)
     W = 1480.
-    oriimg = cv2.imread(filename, cv2.CV_LOAD_IMAGE_COLOR)
+    oriimg = cv2.imread(filename)
     height, width, depth = oriimg.shape
     imgScale = W / width
     newX, newY = oriimg.shape[1] * imgScale, oriimg.shape[0] * imgScale
