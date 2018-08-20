@@ -1,0 +1,7 @@
+scores.txt
+scores_train.txt
+
+res/*.txt
+res/*.out
+
+bak/
